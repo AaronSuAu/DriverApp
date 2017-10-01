@@ -16,6 +16,12 @@
   	<description></description>
   	<servlet-class>servlet.TestDemo</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>LicenseListServlet</servlet-name>
+  	<display-name>LicenseListServlet</display-name>
+  	<description></description>
+  	<servlet-class>servlet.LicenseListServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>Test</servlet-name>
   	<url-pattern>/Test</url-pattern>
@@ -23,5 +29,9 @@
   <servlet-mapping>
   	<servlet-name>TestDemo</servlet-name>
   	<url-pattern>/TestDemo</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>LicenseListServlet</servlet-name>
+  	<url-pattern>/licenses</url-pattern>
   </servlet-mapping>
 </web-app>
