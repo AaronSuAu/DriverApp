@@ -23,10 +23,17 @@
   	<servlet-class>servlet.LicenseListServlet</servlet-class>
   </servlet>
   <servlet>
+<<<<<<< HEAD
   	<servlet-name>DriverLink1</servlet-name>
   	<display-name>DriverLink1</display-name>
   	<description></description>
   	<servlet-class>servlet.DriverLink1</servlet-class>
+=======
+  	<servlet-name>RenewalNoticeListServlet</servlet-name>
+  	<display-name>RenewalNoticeListServlet</display-name>
+  	<description></description>
+  	<servlet-class>servlet.RenewalNoticeListServlet</servlet-class>
+>>>>>>> 528cf4d37724bb0bcbb8481dbe8c52746b4d5ec5
   </servlet>
   <servlet-mapping>
   	<servlet-name>Test</servlet-name>
@@ -41,7 +48,12 @@
   	<url-pattern>/licenses</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
+<<<<<<< HEAD
   	<servlet-name>DriverLink1</servlet-name>
   	<url-pattern>/DriverLink1</url-pattern>
+=======
+  	<servlet-name>RenewalNoticeListServlet</servlet-name>
+  	<url-pattern>/renewalNoticeList</url-pattern>
+>>>>>>> 528cf4d37724bb0bcbb8481dbe8c52746b4d5ec5
   </servlet-mapping>
 </web-app>

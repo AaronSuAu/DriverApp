@@ -12,19 +12,19 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import http.HttpGetDemo;
-import model.LicenseNotice;
+import model.RenewalNotices;
 import response.JsonResponseList;
 
 /**
- * Servlet implementation class LicenseListServlet
+ * Servlet implementation class RenewalNoticeListServlet
  */
-public class LicenseListServlet extends HttpServlet {
+public class RenewalNoticeListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LicenseListServlet() {
+	public RenewalNoticeListServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -36,17 +36,15 @@ public class LicenseListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest servletRequest, HttpServletResponse servletResponse)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at:
-		// ").append(request.getContextPath());
-		String url = "http://localhost:8090/licenseNotice";
+		String url = "http://localhost:8090/renewals";
 		HttpGetDemo request = new HttpGetDemo("123456", url);
 		String responseJson = request.sendGetRequest();
-		JsonResponseList<LicenseNotice> jsonObject = new Gson().fromJson(responseJson,
-				new TypeToken<JsonResponseList<LicenseNotice>>() {
+		JsonResponseList<RenewalNotices> jsonObject = new Gson().fromJson(responseJson,
+				new TypeToken<JsonResponseList<RenewalNotices>>() {
 				}.getType());
-		List<LicenseNotice> licenses = jsonObject.getList();
-		servletRequest.setAttribute("licenses", licenses);
-		servletRequest.getRequestDispatcher("/WEB-INF/jsp/LicenseList.jsp").forward(servletRequest, servletResponse);
+		List<RenewalNotices> notices = jsonObject.getList();
+		servletRequest.setAttribute("notices", notices);
+		servletRequest.getRequestDispatcher("/WEB-INF/jsp/NoticeList.jsp").forward(servletRequest, servletResponse);
 	}
 
 	/**
