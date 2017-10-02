@@ -1,3 +1,5 @@
+<%@page import="model.RenewalNotices"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -25,23 +27,17 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Address</td>
-              <td>john@example.com</td>
-              <td>Status</td>
-              <td>Review Result</td>
-              <td><a href="/xxx?id=nid" class="btn btn-primary">Manual Process</a></td>
-            </tr>
-            <tr>
-              <td>Mary</td>
-              <td>Moe</td>
-              <td>mary@example.com</td>
-            </tr>
-            <tr>
-              <td>July</td>
-              <td>Dooley</td>
-              <td>july@example.com</td>
-            </tr>
+          	<%ArrayList<RenewalNotices> notices = (ArrayList)request.getAttribute("notices");
+         	for(RenewalNotices notice: notices){	
+        	 %> 	
+        	 <tr>
+              <td><%=notice.getAddress() %></td>
+              <td><%=notice.getContact_email() %></td>
+              <td><%=notice.getStatus() %></td>
+              <td><%=notice.getReview_result() %></td>
+              <td><a href="/xxx?id=licid" class="btn btn-primary">Generate Notice</a></td>
+            </tr> 
+        	 <%} %>
           </tbody>
         </table>
       </div>
