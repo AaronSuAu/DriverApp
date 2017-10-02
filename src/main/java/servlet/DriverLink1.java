@@ -35,7 +35,7 @@ public class DriverLink1 extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-    public FeePayments getPayments(RenewalNotices rNotices){
+    public static FeePayments getPayments(RenewalNotices rNotices){
     		HttpGetDemo getDemo2 = new HttpGetDemo(HttpToken.CLIENT_TOKEN, HttpToken.ROOT_URL+"/payments/nid/"+rNotices.getNid());
 		String result = getDemo2.sendGetRequest();
 		JsonObject jsonObject = new JsonParser().parse(result).getAsJsonObject();
@@ -81,7 +81,7 @@ public class DriverLink1 extends HttpServlet {
 					RenewalNotices rNotices = jsonList.getList().get(0);
 					String status = rNotices.getStatus().toLowerCase();
 					//set session of the notice id 
-					servletRequest.getSession().setAttribute("noticeId", rNotices.getNid());
+					servletRequest.getSession().setAttribute("nId", rNotices.getNid());
 					if(status.equals("archived")){
 						servletRequest.getRequestDispatcher("/WEB-INF/jsp/TokenNotValidated.jsp").forward(servletRequest, servletResponse);
 				        return;

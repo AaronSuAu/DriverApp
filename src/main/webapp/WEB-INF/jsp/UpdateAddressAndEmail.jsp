@@ -18,7 +18,7 @@
           <h1>Please update your information</h1>
         </div>
         <div class="col-md-6 col-md-offset-3">
-          <form>
+          <form method="POST" action="/AssignValidationClient/DriverUpdateAdd">
             <label for="address">Address</label>
             <input type="text" name="address" class="form-control" value="<%= rNotices.getAddress() %>" required>
             <label for="email">Email</label>

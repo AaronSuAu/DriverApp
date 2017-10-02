@@ -12,7 +12,7 @@
           <h4>Do you want to extend for another 5 years?</h4>
           <form>
             <div class="radio">
-              <label><input type="radio" name="extend" value="true">Yes</label>
+              <label><input type="radio" name="extend" value="true" checked>Yes</label>
             </div>
             <div class="radio">
               <label><input type="radio" name="extend" value="false">No</label>
