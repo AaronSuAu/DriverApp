@@ -6,7 +6,13 @@
    	<jsp:include page="_header.jsp" />
   </head>
   <body>
-	
+	<div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Your token is not valid or expiries!</h2>
+        </div>
+      </div>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <jsp:include page="_script.jsp" />
