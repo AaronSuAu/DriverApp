@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="model.LicenseNotice"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -20,7 +22,7 @@
         </form>
       </div>
       <div class="col-sm-6 text-center">
-          <h1>Liceses</h1>
+          <h1>Liceses</h1> 
       </div>
       <div class="col-sm-12">
         <table class="table">
@@ -36,27 +38,22 @@
               <th>Operation</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>John</td>
-              <td>Doe</td>
-              <td>john@example.com</td>
-              <td>License Number</td>
-              <td>License Class</td>
-              <td>Expiry Date</td>
-              <td>Status</td>
+         
+          <tbody>  
+          	<%ArrayList<LicenseNotice> licenses = (ArrayList)request.getAttribute("licenses");
+         	for(LicenseNotice license: licenses){	
+        	 %> 	
+        	 <tr>
+              <td><%=license.getDriver_name() %></td>
+              <td><%=license.getAddress() %></td>
+              <td><%=license.getEmail() %></td>
+              <td><%=license.getLicense_number() %></td>
+              <td><%=license.getLicense_class() %></td>
+              <td><%=license.getExpiry_date() %></td>
+              <td><%=license.getStatus() %></td>
               <td><a href="/xxx?id=licid" class="btn btn-primary">Generate Notice</a></td>
-            </tr>
-            <tr>
-              <td>Mary</td>
-              <td>Moe</td>
-              <td>mary@example.com</td>
-            </tr>
-            <tr>
-              <td>July</td>
-              <td>Dooley</td>
-              <td>july@example.com</td>
-            </tr>
+            </tr> 
+        	 <%} %>
           </tbody>
         </table>
       </div>

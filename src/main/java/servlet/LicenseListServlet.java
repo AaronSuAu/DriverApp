@@ -46,7 +46,7 @@ public class LicenseListServlet extends HttpServlet {
 				}.getType());
 		List<LicenseNotice> licenses = jsonObject.getList();
 		servletRequest.setAttribute("licenses", licenses);
-		servletRequest.getRequestDispatcher("LicenseList.jsp").forward(servletRequest, servletResponse);
+		servletRequest.getRequestDispatcher("/WEB-INF/jsp/LicenseList.jsp").forward(servletRequest, servletResponse);
 	}
 
 	/**
