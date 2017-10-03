@@ -46,6 +46,18 @@
 		<description></description>
 		<servlet-class>servlet.DriverExtend</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>ManualServlet</servlet-name>
+		<display-name>ManualServlet</display-name>
+		<description></description>
+		<servlet-class>servlet.ManualServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>OfficerUpdateServlet</servlet-name>
+		<display-name>OfficerUpdateServlet</display-name>
+		<description></description>
+		<servlet-class>servlet.OfficerUpdateServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>Test</servlet-name>
 		<url-pattern>/Test</url-pattern>
@@ -74,5 +86,13 @@
 	<servlet-mapping>
 		<servlet-name>DriverExtend</servlet-name>
 		<url-pattern>/DriverExtend</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ManualServlet</servlet-name>
+		<url-pattern>/manual</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>OfficerUpdateServlet</servlet-name>
+		<url-pattern>/manuallyUpdate</url-pattern>
 	</servlet-mapping>
 </web-app>
