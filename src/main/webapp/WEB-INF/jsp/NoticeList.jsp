@@ -35,7 +35,7 @@
               <td><%=notice.getContact_email() %></td>
               <td><%=notice.getStatus() %></td>
               <td><%=notice.getReview_result() %></td>
-              <td><a href="/xxx?id=licid" class="btn btn-primary">Generate Notice</a></td>
+              <td><a href="/xxx?id=licid" class="btn btn-primary">Update</a></td>
             </tr> 
         	 <%} %>
           </tbody>
