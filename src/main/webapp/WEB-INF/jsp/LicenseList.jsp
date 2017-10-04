@@ -51,7 +51,7 @@
               <td><%=license.getLicense_class() %></td>
               <td><%=license.getExpiry_date() %></td>
               <td><%=license.getStatus() %></td>
-              <td><a href="/xxx?id=licid" class="btn btn-primary">Generate Notice</a></td>
+              <td><a href=<%="/AssignValidationClient/generateNotice?licid="+license.getLicid() %> class="btn btn-primary">Generate Notice</a></td>
             </tr> 
         	 <%} %>
           </tbody>

@@ -58,6 +58,12 @@
 		<description></description>
 		<servlet-class>servlet.OfficerUpdateServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>GenerateNoticeServlet</servlet-name>
+		<display-name>GenerateNoticeServlet</display-name>
+		<description></description>
+		<servlet-class>servlet.GenerateNoticeServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>Test</servlet-name>
 		<url-pattern>/Test</url-pattern>
@@ -94,5 +100,9 @@
 	<servlet-mapping>
 		<servlet-name>OfficerUpdateServlet</servlet-name>
 		<url-pattern>/manuallyUpdate</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>GenerateNoticeServlet</servlet-name>
+		<url-pattern>/generateNotice</url-pattern>
 	</servlet-mapping>
 </web-app>

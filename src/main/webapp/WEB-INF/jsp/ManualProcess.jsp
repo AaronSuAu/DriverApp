@@ -17,8 +17,8 @@
         <% RenewalNotices notice = (RenewalNotices)request.getAttribute("notice");%>
         <% String status = notice.getStatus(); %> 
           <form action="/AssignValidationClient/manuallyUpdate" method="POST" style="margin-top: 10px;">
-            <label for="licenseNumber">License Number:</label>
-            <p id="licenseNumber"> <%=notice.getLicid() %></p>
+           <%--  <label for="licenseNumber">License Number:</label>
+            <p id="licenseNumber"> <%=notice.getLicid() %></p> --%>
             <label for="address">Address</label>
             <input type="text" name="address" id="address" class="form-control" value=<%=notice.getAddress() %>>
             <label for="email">Email</label>
