@@ -50,8 +50,14 @@
               <td><%=license.getLicense_number() %></td>
               <td><%=license.getLicense_class() %></td>
               <td><%=license.getExpiry_date() %></td>
-              <td><%=license.getStatus() %></td>
-              <td><a href=<%="/AssignValidationClient/generateNotice?licid="+license.getLicid() %> class="btn btn-primary">Generate Notice</a></td>
+   				<%if(license.getStatus() == null){ %>
+   				<td>No Notice Generated</td>
+   				<td><a href=<%="/AssignValidationClient/generateNotice?licid="+license.getLicid() %> class="btn btn-primary">Generate Notice</a></td>
+   				<%}else{ %>
+             	 <td><%=license.getStatus() %></td>
+             	 <td><button class="btn btn-block">Generate Notice</button></td>
+              <%} %>
+              
             </tr> 
         	 <%} %>
           </tbody>
