@@ -22,12 +22,16 @@
         		   %>
         		   <h3>Your request for extension has been approved.</h3>
         		   <% 
+        	   }else{
+        		   %>
+        		   <h3>Please pay the money to finsh the renewal process.</h3> 
+        		   <% 
         	   }
         %>
-        <h3></h3>
-          <form>
+          <form method="POST" action="/AssignValidationClient/DriverPayment">
             <label for="amount">Amount</label>
             <p id="amount">$ <%= fPayments.getAmount() %></p>
+            <input type="hidden" name="confirm" value="1">
             <input type="submit" name="" value="Pay" class="btn btn-primary">
           </form>
         </div>

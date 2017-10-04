@@ -46,6 +46,18 @@
 		<description></description>
 		<servlet-class>servlet.DriverExtend</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>DriverPayment</servlet-name>
+		<display-name>DriverPayment</display-name>
+		<description></description>
+		<servlet-class>servlet.DriverPayment</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>DriverLink2</servlet-name>
+		<display-name>DriverLink2</display-name>
+		<description></description>
+		<servlet-class>servlet.DriverLink2</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>Test</servlet-name>
 		<url-pattern>/Test</url-pattern>
@@ -74,5 +86,13 @@
 	<servlet-mapping>
 		<servlet-name>DriverExtend</servlet-name>
 		<url-pattern>/DriverExtend</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DriverPayment</servlet-name>
+		<url-pattern>/DriverPayment</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DriverLink2</servlet-name>
+		<url-pattern>/DriverLink2</url-pattern>
 	</servlet-mapping>
 </web-app>

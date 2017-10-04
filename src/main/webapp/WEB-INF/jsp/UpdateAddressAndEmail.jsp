@@ -7,6 +7,11 @@
 <html lang="en">
   <head>
    	<jsp:include page="_header.jsp" />
+    <style type="text/css">
+      .form-group{
+        display: none;
+      }
+    </style>
   </head>
   <body>
   		<% RenewalNotices rNotices= (RenewalNotices)request.getAttribute("renewalNotices"); 
@@ -19,12 +24,39 @@
         </div>
         <div class="col-md-6 col-md-offset-3">
           <form method="POST" action="/AssignValidationClient/DriverUpdateAdd">
-            <label for="address">Address</label>
-            <input type="text" name="address" class="form-control" value="<%= rNotices.getAddress() %>" required>
             <label for="email">Email</label>
             <input type="email" name="email" required class="form-control" value="<%= rNotices.getContact_email() %>">
+            <label for="address">Address</label>
+            <p><%= rNotices.getAddress() %></p>
             <label for="expiryDate">Expiry Date</label>
             <p id="expiryDate"> <%= carLicenses.getExpiry_date() %></p>
+            <label for="change">Do you want to update your address?</label>
+            <div class="radio">
+              <label><input type="radio" name="change" value="true">Yes</label>
+            </div>
+            <div class="radio">
+              <label><input type="radio" name="change" value="false" checked>No</label>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">PreStreet</label> 
+              <input type="text" class="form-control addressDetail" name="preStreet" id="preStreet" placeholder="preStreet"/>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">StreetName</label> 
+              <input type="text" class="form-control addressDetail" name="streetName" placeholder="streetName"/>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">StreetType</label> 
+              <input type="text" class="form-control addressDetail" name="streetType" placeholder="streetType"/>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Suburb</label> 
+              <input type="text" class="form-control addressDetail" name="suburb" placeholder="suburb" />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">State(only support NSW and ACT)</label> 
+              <input type="text" class="form-control addressDetail" name="state" placeholder="state"/>
+            </div>
             <input type="submit" name="" class="btn btn-primary btn-spacing" value="Next">
           </form>
         </div>
@@ -33,5 +65,20 @@
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <jsp:include page="_script.jsp" />
+    <script type="text/javascript">
+      $(function(){
+        $("input[name='change']").change(function() {
+          var change = $("input[name='change']:checked").val();
+          console.log(change);
+          if(change === 'true'){
+            $(".form-group").show();
+            $(".addressDetail").attr("required", true);
+          }else{
+            $(".form-group").hide();
+            $(".addressDetail").attr("required", false);            
+          }
+        })
+      });
+    </script>
   </body>
 </html>
