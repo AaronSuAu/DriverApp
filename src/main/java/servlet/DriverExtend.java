@@ -36,6 +36,7 @@ public class DriverExtend extends HttpServlet {
 			return;
 		} 
 		int nid = Integer.parseInt(servletRequest.getSession().getAttribute("nId").toString());
+		System.out.println(nid);
 		RenewalNotices rNotices = DriverUpdateAdd.getRenewalsByNid(nid);
 		if(rNotices == null){
 			servletResponse.getWriter().append("Error");
@@ -57,6 +58,8 @@ public class DriverExtend extends HttpServlet {
 				servletRequest.setAttribute("feePayments", fPayments);
 				servletRequest.getSession().setAttribute("paymentId", fPayments.getPid());
 				servletRequest.getRequestDispatcher("/WEB-INF/jsp/Payment.jsp").forward(servletRequest, servletResponse);
+			}else{
+				servletResponse.getWriter().append("The payment hasn't been created by the officer.");
 			}
 			
 		}

@@ -10,7 +10,7 @@
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
           <h4>Do you want to extend for another 5 years?</h4>
-          <form>
+          <form action="/AssignValidationClient/DriverExtend" method="POST">
             <div class="radio">
               <label><input type="radio" name="extend" value="true" checked>Yes</label>
             </div>

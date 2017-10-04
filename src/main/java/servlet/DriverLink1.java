@@ -82,6 +82,7 @@ public class DriverLink1 extends HttpServlet {
 					String status = rNotices.getStatus().toLowerCase();
 					//set session of the notice id 
 					servletRequest.getSession().setAttribute("nId", rNotices.getNid());
+					System.out.println("********"+status);
 					if(status.equals("archived")){
 						servletRequest.getRequestDispatcher("/WEB-INF/jsp/TokenNotValidated.jsp").forward(servletRequest, servletResponse);
 				        return;
@@ -101,7 +102,7 @@ public class DriverLink1 extends HttpServlet {
 						servletRequest.setAttribute("renewalNotices", rNotices);
 						servletRequest.getRequestDispatcher("/WEB-INF/jsp/Extend.jsp").forward(servletRequest, servletResponse);
 				        return;
-					} else if(status.equals("5yearreview")){
+					} else if(status.equals("5yearreview") || status.equals("underreview")){
 						servletRequest.getRequestDispatcher("/WEB-INF/jsp/ExtendWait.jsp").forward(servletRequest, servletResponse);
 				        return;
 					} else if(status.equals("rejected") || status.equals("accepted")){
