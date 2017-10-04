@@ -130,7 +130,7 @@ public class DriverUpdateAdd extends HttpServlet {
 			return false;
 		} else{
 			Integer times = (Integer) request.getSession().getAttribute("failedTimes");
-			if(times < 3){
+			if(times < 2){
 				times ++;
 				request.getSession().setAttribute("failedTimes", times);
 				return false;
@@ -170,6 +170,7 @@ public class DriverUpdateAdd extends HttpServlet {
 			servletResponse.getWriter().append("Email not validate!, please go back");
 			return;
 		}
+		
 		if(servletRequest.getParameter("change").toString().equals("false")){
 			// address unchanged, go to the next page without validating the address
 			rNotices.setContact_email(email);
@@ -207,6 +208,7 @@ public class DriverUpdateAdd extends HttpServlet {
 				}
 			}
 			//address correct. update.
+			rNotices.setContact_email(email);
 			rNotices.setStatus("validated");
 			JsonObject jsonObject = updateRenewas(rNotices);
 			if (jsonObject.has("code") && jsonObject.get("code").toString().equals("200")) {

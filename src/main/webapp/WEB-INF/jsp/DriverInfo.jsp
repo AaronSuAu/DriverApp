@@ -39,6 +39,10 @@
 					<th>Expiry Date</th>
 					<td> <%= ln.getExpiry_date() %> </td>
 				</tr>
+				<tr>
+					<th>Status</th>
+					<td> <%= ln.getStatus() %> </td>
+				</tr>
 			</tbody>
 		</table>
 	</div>
