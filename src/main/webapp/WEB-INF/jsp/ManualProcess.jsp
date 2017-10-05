@@ -1,3 +1,4 @@
+<%@page import="model.FeePayments"%>
 <%@page import="model.RenewalNotices"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -14,7 +15,9 @@
         	if(error != null){ %>
         	<h5><%=error %></h5>
         <%}%>
-        <% RenewalNotices notice = (RenewalNotices)request.getAttribute("notice");%>
+        <% RenewalNotices notice = (RenewalNotices)request.getAttribute("notice");
+        	FeePayments payment = (FeePayments)request.getAttribute("payment");
+ 	     %>
         <% String status = notice.getStatus(); %> 
           <form action="/AssignValidationClient/manuallyUpdate" method="POST" style="margin-top: 10px;">
            <%--  <label for="licenseNumber">License Number:</label>
@@ -36,7 +39,7 @@
             <label for="reviewResult">Review Result</label>
             <input type="text" name="reviewResult" id="reviewResult" class="form-control" value=<%=notice.getReview_result() %>>
             <label for="amount" >Amount:</label>
-            <input type="number" name="amount" id="amount" class="form-control">
+            <input type="number" name="amount" id="amount" class="form-control" value=<%=payment.getAmount() %>>
             <input type="text" name="nid" hidden value=<%=notice.getNid() %>>
             <input type="submit" name="" value="Update" class="btn btn-primary btn-spacing">
             <a href="/AssignValidationClient/renewalNoticeList" class="btn btn-danger btn-spacing">Go Back</a>

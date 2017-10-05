@@ -13,6 +13,7 @@ import com.google.gson.reflect.TypeToken;
 
 import http.HttpGetDemo;
 import http.HttpPutDemo;
+import model.FeePayments;
 import model.RenewalNotices;
 import response.JsonResponseList;
 
@@ -43,10 +44,11 @@ public class OfficerUpdateServlet extends HttpServlet {
 		String email = request.getParameter("email").trim();
 		String status = request.getParameter("status").trim();
 		String reviewResult = request.getParameter("reviewResult").trim();
+		float amount;
 		try {
-			float amount = Float.parseFloat(request.getParameter("amount").trim());
+			amount = Float.parseFloat(request.getParameter("amount").trim());
 		} catch (Exception e) {
-			float amount = -1;
+			amount = -1;
 		}
 		int nid = Integer.parseInt(request.getParameter("nid").trim());
 		// get the notice
@@ -77,7 +79,29 @@ public class OfficerUpdateServlet extends HttpServlet {
 					/*
 					 * TODO update fee amount
 					 */
-					request.getRequestDispatcher("/renewalNoticeList").forward(request, response);
+					url = "http://localhost:8090/payments/nid/" + notice.getNid();
+					HttpGetDemo getRequest = new HttpGetDemo("123456", url);
+					String getResponse = getRequest.sendGetRequest();
+					JsonResponseList<FeePayments> paymentJson = gson.fromJson(getResponse,
+							new TypeToken<JsonResponseList<FeePayments>>() {
+							}.getType());
+					FeePayments payment = paymentJson.getList().get(0);
+					if (amount < 0 || amount == payment.getAmount()) {
+						request.getRequestDispatcher("/renewalNoticeList").forward(request, response);
+					} else {
+						payment.setAmount((int) amount);
+						url = "http://localhost:8090/payments";
+						putRequest = new HttpPutDemo(url, "123456", gson.toJson(payment));
+						putResponse = putRequest.sendPutRequest();
+						paymentJson = gson.fromJson(putResponse, new TypeToken<JsonResponseList<FeePayments>>() {
+						}.getType());
+						if (paymentJson.getCode() == 200) {
+							request.getRequestDispatcher("/renewalNoticeList").forward(request, response);
+						} else {
+							request.setAttribute("error", "Fee Amount Update Failed. Code: " + jsonObject.getCode());
+							request.getRequestDispatcher("/WEB-INF/jsp/ManualProcess.jsp").forward(request, response);
+						}
+					}
 
 				} else {
 					request.setAttribute("error", "Update Renewal Notice Failed. Code: " + jsonObject.getCode());
