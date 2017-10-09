@@ -9,12 +9,17 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6 col-sm-offset-3">
-					<form method="POST" action="">
+					
+					<form method="POST" action="/AssignValidationClient/login">
 						<label for="username">Username: </label>
 						<input type="text" id="username" name="username" class="form-control" required>
 						<label for="password">Password: </label>
 						<input type="password" name="password" class="form-control" required>
-						<input type="submit" name="Login" class="btn btn-primary btn-block btn-spacing">
+						<%String error = (String)request.getAttribute("error");
+						   if(error != null){   %>
+						   <h4> <%=error %></h4>
+						   <%} %>
+						<input type="submit" name="Login" class="btn btn-primary btn-block btn-spacing" value="Login">
 						
 					</form>
 				</div>

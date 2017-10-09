@@ -76,6 +76,12 @@
 		<description></description>
 		<servlet-class>servlet.GenerateNoticeServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>OfficerLoginServlet</servlet-name>
+		<display-name>OfficerLoginServlet</display-name>
+		<description></description>
+		<servlet-class>servlet.OfficerLoginServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>Test</servlet-name>
 		<url-pattern>/Test</url-pattern>
@@ -125,4 +131,11 @@
 		<servlet-name>GenerateNoticeServlet</servlet-name>
 		<url-pattern>/generateNotice</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>OfficerLoginServlet</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+	<welcome-file-list>
+        <welcome-file>/WEB-INF/jsp/OfficerLogin.jsp</welcome-file>
+    </welcome-file-list>
 </web-app>
