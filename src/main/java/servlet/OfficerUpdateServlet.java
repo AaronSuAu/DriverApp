@@ -66,7 +66,9 @@ public class OfficerUpdateServlet extends HttpServlet {
 			if (!email.equals(""))
 				notice.setContact_email(email);
 			notice.setStatus(status);
-			notice.setReview_result(reviewResult);
+			if (!reviewResult.equals("")) {
+				notice.setReview_result(reviewResult);
+			}
 			// send put to rest server
 			try {
 				url = "http://localhost:8090/renewals";
@@ -76,9 +78,6 @@ public class OfficerUpdateServlet extends HttpServlet {
 				}.getType());
 				if (jsonObject.getCode() == 200) {
 					// update fee amount
-					/*
-					 * TODO update fee amount
-					 */
 					url = "http://localhost:8090/payments/nid/" + notice.getNid();
 					HttpGetDemo getRequest = new HttpGetDemo("123456", url);
 					String getResponse = getRequest.sendGetRequest();
