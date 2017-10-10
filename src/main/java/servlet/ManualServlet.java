@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import http.HttpGetDemo;
+import model.FeePayments;
 import model.RenewalNotices;
 import response.JsonResponseList;
 
@@ -44,7 +45,16 @@ public class ManualServlet extends HttpServlet {
 				new TypeToken<JsonResponseList<RenewalNotices>>() {
 				}.getType());
 		List<RenewalNotices> notices = jsonObject.getList();
+		// get payment
+		url = "http://localhost:8090/payments/nid/" + nid;
+		request = new HttpGetDemo("123456", url);
+		responseJson = request.sendGetRequest();
+		JsonResponseList<FeePayments> paymentJson = new Gson().fromJson(responseJson,
+				new TypeToken<JsonResponseList<FeePayments>>() {
+				}.getType());
+		List<FeePayments> payments = paymentJson.getList();
 		servletRequest.setAttribute("notice", notices.get(0));
+		servletRequest.setAttribute("payment", payments.get(0));
 		servletRequest.getRequestDispatcher("/WEB-INF/jsp/ManualProcess.jsp").forward(servletRequest, servletResponse);
 	}
 

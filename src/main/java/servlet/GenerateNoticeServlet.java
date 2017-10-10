@@ -86,7 +86,9 @@ public class GenerateNoticeServlet extends HttpServlet {
 		if (paymentJson.getCode() == 200) {
 			// send email
 			if (EmailUtil.sendEmail(notice.getContact_email(), "comp9322renewal@gmail.com", notice.getAccess_token()))
-				request.getRequestDispatcher("/licenses").forward(request, response);
+				response.sendRedirect("/AssignValidationClient/licenses");
+			// request.getRequestDispatcher("/licenses").forward(request,
+			// response);
 
 		}
 

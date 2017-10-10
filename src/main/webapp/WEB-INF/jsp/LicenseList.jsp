@@ -41,19 +41,32 @@
          
           <tbody>  
           	<%ArrayList<LicenseNotice> licenses = (ArrayList)request.getAttribute("licenses");
-         	for(LicenseNotice license: licenses){	
+         	for(LicenseNotice license: licenses){
+         		if(license.getStatus() == null){
         	 %> 	
         	 <tr>
+	              <td><%=license.getDriver_name() %></td>
+	              <td><%=license.getAddress() %></td>
+	              <td><%=license.getEmail() %></td>
+	              <td><%=license.getLicense_number() %></td>
+	              <td><%=license.getLicense_class() %></td>
+	              <td><%=license.getExpiry_date() %></td>
+	   				<td>No Notice Generated</td>
+	   				<td><a href=<%="/AssignValidationClient/generateNotice?licid="+license.getLicid() %> class="btn btn-primary">Generate Notice</a></td>
+            </tr> 
+        	 
+        	 <%} else if(!license.getStatus().equals("archived")){%>
+        	 	<tr>
               <td><%=license.getDriver_name() %></td>
               <td><%=license.getAddress() %></td>
               <td><%=license.getEmail() %></td>
               <td><%=license.getLicense_number() %></td>
               <td><%=license.getLicense_class() %></td>
               <td><%=license.getExpiry_date() %></td>
-              <td><%=license.getStatus() %></td>
-              <td><a href=<%="/AssignValidationClient/generateNotice?licid="+license.getLicid() %> class="btn btn-primary">Generate Notice</a></td>
-            </tr> 
-        	 <%} %>
+             	 <td><%=license.getStatus() %></td>
+             	 <td><button class="btn btn-block">Generate Notice</button></td>
+             	</tr>
+              <%}} %>	
           </tbody>
         </table>
       </div>
