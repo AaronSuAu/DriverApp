@@ -100,6 +100,21 @@ public class DriverPayment extends HttpServlet {
 		}
 		int nid = Integer.parseInt(servletRequest.getSession().getAttribute("nId").toString());
 		RenewalNotices rNotices = DriverUpdateAdd.getRenewalsByNid(nid);
+		if(rNotices == null){
+			servletResponse.getWriter().append("Server Error. Try later");
+			return;
+		}
+		HttpPutDemo putDemo = new HttpPutDemo(HttpToken.ROOT_URL+"/payments/finish", HttpToken.CLIENT_TOKEN, new Gson().toJson(rNotices));
+		String result = putDemo.sendPutRequest();
+		JsonObject jsonObject = new JsonParser().parse(result).getAsJsonObject();
+		if(jsonObject.has("code") && jsonObject.get("code").toString().equals("200")){
+			servletRequest.getRequestDispatcher("/WEB-INF/jsp/PaymentSuccess.jsp").forward(servletRequest, servletResponse);
+			return;
+		}else{
+			servletResponse.getWriter().append(jsonObject.get("description").toString());
+			return;
+		}
+		/*RenewalNotices rNotices = DriverUpdateAdd.getRenewalsByNid(nid);
 		FeePayments fPayments = DriverLink1.getPayments(rNotices);
 		
 		if(fPayments != null){
@@ -121,7 +136,7 @@ public class DriverPayment extends HttpServlet {
 				}
 			}
 		}
-		servletResponse.getWriter().append("Server Error. Try later");
+		servletResponse.getWriter().append("Server Error. Try later");*/
 	}
 
 	/**

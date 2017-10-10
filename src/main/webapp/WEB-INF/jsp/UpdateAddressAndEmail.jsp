@@ -25,7 +25,7 @@
         <div class="col-md-6 col-md-offset-3">
           <form method="POST" action="/AssignValidationClient/DriverUpdateAdd">
             <label for="email">Email</label>
-            <input type="email" name="email" required class="form-control" value="<%= rNotices.getContact_email() %>">
+            <p><%= rNotices.getContact_email() %> </p>
             <label for="address">Address</label>
             <p><%= rNotices.getAddress() %></p>
             <label for="expiryDate">Expiry Date</label>
@@ -36,6 +36,10 @@
             </div>
             <div class="radio">
               <label><input type="radio" name="change" value="false" checked>No</label>
+            </div>
+            <div class="form-group">    
+               <label for="email">Email</label>        
+            	   <input type="email" name="email" required class="form-control addressDetail" value="<%= rNotices.getContact_email() %>">
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">PreStreet</label> 

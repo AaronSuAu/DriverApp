@@ -18,6 +18,7 @@ import http.HttpToken;
 import model.CarLicenses;
 import model.FeePayments;
 import model.LicenseNotice;
+import model.RenewalNoticeHATEOS;
 import model.RenewalNotices;
 import response.JsonResponseList;
 
@@ -49,8 +50,8 @@ public class DriverLink1 extends HttpServlet {
 		return null;
     }
     
-    public CarLicenses getLicense(RenewalNotices rNotices){
-    		HttpGetDemo getDemo = new HttpGetDemo(HttpToken.CLIENT_TOKEN, HttpToken.ROOT_URL+"/licenses/"+rNotices.getLicid());
+    public CarLicenses getLicense(RenewalNoticeHATEOS rHateos){
+    		HttpGetDemo getDemo = new HttpGetDemo(HttpToken.CLIENT_TOKEN, rHateos.getLink());
     		String result = getDemo.sendGetRequest();
     		JsonObject jsonObject = new JsonParser().parse(result).getAsJsonObject();
     		if(jsonObject.has("code") && jsonObject.get("code").toString().equals("200")){
@@ -75,19 +76,19 @@ public class DriverLink1 extends HttpServlet {
 			String result = getDemo.sendGetRequest();
 			JsonObject jsonObject = new JsonParser().parse(result).getAsJsonObject();
 			if(jsonObject.has("code") && jsonObject.get("code").toString().equals("200")){
-				JsonResponseList<RenewalNotices> jsonList= new Gson().fromJson(result, new TypeToken<JsonResponseList<RenewalNotices>>() {
+				JsonResponseList<RenewalNoticeHATEOS> jsonList= new Gson().fromJson(result, new TypeToken<JsonResponseList<RenewalNoticeHATEOS>>() {
 				}.getType());
 				if(jsonList.getList().size() == 1){
+					RenewalNoticeHATEOS rHateos = jsonList.getList().get(0);
 					RenewalNotices rNotices = jsonList.getList().get(0);
 					String status = rNotices.getStatus().toLowerCase();
 					//set session of the notice id 
 					servletRequest.getSession().setAttribute("nId", rNotices.getNid());
-					System.out.println("********"+status);
 					if(status.equals("archived")){
 						servletRequest.getRequestDispatcher("/WEB-INF/jsp/TokenNotValidated.jsp").forward(servletRequest, servletResponse);
 				        return;
 					} else if(status.equals("new")){
-						CarLicenses carLicenses = getLicense(rNotices);
+						CarLicenses carLicenses = getLicense(rHateos);
 						if(carLicenses != null){
 							servletRequest.setAttribute("carLicenses", carLicenses);
 							servletRequest.setAttribute("renewalNotices", rNotices);
@@ -102,7 +103,7 @@ public class DriverLink1 extends HttpServlet {
 						servletRequest.setAttribute("renewalNotices", rNotices);
 						servletRequest.getRequestDispatcher("/WEB-INF/jsp/Extend.jsp").forward(servletRequest, servletResponse);
 				        return;
-					} else if(status.equals("5yearreview") || status.equals("underreview")){
+					} else if(status.equals("5yearreview") || status.contains("underreview")){
 						servletRequest.getRequestDispatcher("/WEB-INF/jsp/ExtendWait.jsp").forward(servletRequest, servletResponse);
 				        return;
 					} else if(status.equals("rejected") || status.equals("accepted")){
@@ -115,7 +116,10 @@ public class DriverLink1 extends HttpServlet {
 							servletRequest.getSession().setAttribute("paymentId", fPayments.getPid());
 							servletRequest.getRequestDispatcher("/WEB-INF/jsp/Payment.jsp").forward(servletRequest, servletResponse);
 					        return;
-						}	
+						}else{
+							servletResponse.getWriter().append("Payment has not been created");
+							return;
+						}
 					} 
 				}
 			}

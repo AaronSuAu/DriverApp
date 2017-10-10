@@ -161,19 +161,15 @@ public class DriverUpdateAdd extends HttpServlet {
 
 		int nid = Integer.parseInt(servletRequest.getSession().getAttribute("nId").toString());
 		RenewalNotices rNotices = getRenewalsByNid(nid);
-		String email = servletRequest.getParameter("email").toString();
+		
 		if(rNotices == null){
 			servletResponse.getWriter().append("Error");
 			return;
 		}
-		if(!soapValidate(email)){
-			servletResponse.getWriter().append("Email not validate!, please go back");
-			return;
-		}
+		
 		
 		if(servletRequest.getParameter("change").toString().equals("false")){
 			// address unchanged, go to the next page without validating the address
-			rNotices.setContact_email(email);
 			rNotices.setStatus("validated");
 			JsonObject jsonObject = updateRenewas(rNotices);
 			if (jsonObject.has("code") && jsonObject.get("code").toString().equals("200")) {
@@ -185,6 +181,11 @@ public class DriverUpdateAdd extends HttpServlet {
 			}
 		}else{
 			// address changed
+			String email = servletRequest.getParameter("email").toString();
+			if(!soapValidate(email)){
+				servletResponse.getWriter().append("Email not validate!, please go back");
+				return;
+			}
 			String preStreet = servletRequest.getParameter("preStreet").toString().trim();
 			String streetType = servletRequest.getParameter("streetType").toString().trim();
 			String streetName = servletRequest.getParameter("streetName").toString().trim();
