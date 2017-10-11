@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import http.HttpGetDemo;
+import http.HttpToken;
 import model.RenewalNotices;
 import response.JsonResponseList;
 
@@ -37,7 +38,7 @@ public class RenewalNoticeListServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String url = "http://localhost:8090/renewals";
-		HttpGetDemo request = new HttpGetDemo("123456", url);
+		HttpGetDemo request = new HttpGetDemo(HttpToken.OFFICER_TOKEN, url);
 		String responseJson = request.sendGetRequest();
 		JsonResponseList<RenewalNotices> jsonObject = new Gson().fromJson(responseJson,
 				new TypeToken<JsonResponseList<RenewalNotices>>() {

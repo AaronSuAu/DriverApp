@@ -12,14 +12,18 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-3">
-        <form action="" method="">
+        <form action="/AssignValidationClient/expiry" method="POST">
           <div class="input-group">
-            <input type="number" class="form-control" placeholder="Enter due date">
+            <input type="number" class="form-control" placeholder="Enter due date" name="days">
              <span class="input-group-btn">
                   <button type="submit" class="btn btn-default">Filter</button>
              </span>
           </div>
         </form>
+        <%String error = (String)request.getAttribute("error");
+						   if(error != null){   %>
+						   <h4> <%=error %></h4>
+						   <%} %>
       </div>
       <div class="col-sm-6 text-center">
           <h1>Liceses</h1> 
@@ -41,6 +45,7 @@
          
           <tbody>  
           	<%ArrayList<LicenseNotice> licenses = (ArrayList)request.getAttribute("licenses");
+          	if(licenses != null){
          	for(LicenseNotice license: licenses){
          		if(license.getStatus() == null){
         	 %> 	
@@ -66,7 +71,7 @@
              	 <td><%=license.getStatus() %></td>
              	 <td><button class="btn btn-block">Generate Notice</button></td>
              	</tr>
-              <%}} %>	
+              <%}}} %>	
           </tbody>
         </table>
       </div>
