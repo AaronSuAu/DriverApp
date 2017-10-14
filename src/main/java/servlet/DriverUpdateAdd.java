@@ -195,6 +195,8 @@ public class DriverUpdateAdd extends HttpServlet {
 					streetName, suburb, state, rNotices);
 			if(!result.equals("success")){
 				// validate fail
+				rNotices.setAddress(preStreet +", " +streetType+", "+ streetName+", "+suburb+", "
+						+ state);
 				if(isFailed(servletRequest, rNotices)){
 					// failed 3 times
 					//servletRequest.setAttribute("reason", result);
