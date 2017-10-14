@@ -34,6 +34,10 @@
               <option value="accepted" <%if(status.equals("accepted")){ %> selected <%} %>>Accepted</option>
               <option value="failed" <%if(status.equals("failed")){ %> selected <%} %>>Failed</option>
               <option value="underReview" <%if(status.equals("underReview")){ %> selected <%} %>>UnderReview</option>
+              <option value="5YearReview" <%if(status.equals("5YearReview")){ %> selected <%} %>>5YearReview</option>
+              <option value="archived">Archived</option>
+              
+              
 
             </select>
             <label for="reviewResult">Review Result</label>

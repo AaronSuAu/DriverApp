@@ -28,6 +28,7 @@
           </thead>
           <tbody>
           	<%ArrayList<RenewalNotices> notices = (ArrayList)request.getAttribute("notices");
+          	if(notices!=null){
          	for(RenewalNotices notice: notices){	
         	 %> 	
         	 <tr>
@@ -37,7 +38,7 @@
               <td><%=notice.getReview_result() %></td>
               <td><a href=<%="/AssignValidationClient/manual?nid="+notice.getNid() %> class="btn btn-primary">   Update   </a></td>
             </tr> 
-        	 <%} %>
+        	 <%}} %>
           </tbody>
         </table>
       </div>
