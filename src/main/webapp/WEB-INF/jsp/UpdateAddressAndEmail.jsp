@@ -24,7 +24,7 @@
         </div>
         <div class="col-md-6 col-md-offset-3">
           <form method="POST" action="/AssignValidationClient/DriverUpdateAdd">
-            <label for="email">Email</label>
+            <label for="">Email</label>
             <p><%= rNotices.getContact_email() %> </p>
             <label for="address">Address</label>
             <p><%= rNotices.getAddress() %></p>
@@ -38,27 +38,27 @@
               <label><input type="radio" name="change" value="false" checked>No</label>
             </div>
             <div class="form-group">    
-               <label for="email">Email</label>        
-            	   <input type="email" name="email" required class="form-control addressDetail" value="<%= rNotices.getContact_email() %>">
+               <label for="">Email</label>        
+            	   <input type="email" name="email" class="form-control addressDetail" value="<%= rNotices.getContact_email() %>">
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">PreStreet</label> 
+              <label for="">PreStreet</label> 
               <input type="text" class="form-control addressDetail" name="preStreet" id="preStreet" placeholder="preStreet"/>
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">StreetName</label> 
+              <label for="">StreetName</label> 
               <input type="text" class="form-control addressDetail" name="streetName" placeholder="streetName"/>
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">StreetType</label> 
+              <label for="">StreetType</label> 
               <input type="text" class="form-control addressDetail" name="streetType" placeholder="streetType"/>
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">Suburb</label> 
+              <label for="">Suburb</label> 
               <input type="text" class="form-control addressDetail" name="suburb" placeholder="suburb" />
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">State(only support NSW and ACT)</label> 
+              <label for="">State(only support NSW and ACT)</label> 
               <input type="text" class="form-control addressDetail" name="state" placeholder="state"/>
             </div>
             <input type="submit" name="" class="btn btn-primary btn-spacing" value="Next">

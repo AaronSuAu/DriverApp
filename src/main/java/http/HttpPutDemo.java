@@ -30,7 +30,7 @@ public class HttpPutDemo {
 			entity = new StringEntity(jsonString);
 			client = HttpClientBuilder.create().build();
 			put = new HttpPut(url);
-			put.setHeader("Authorization: ", header);
+			put.setHeader("Authorization", header);
 			put.setHeader("Content-type", "application/json");
 			put.setEntity(entity);
 		} catch (UnsupportedEncodingException e) {

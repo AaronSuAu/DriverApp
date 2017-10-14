@@ -33,7 +33,7 @@ public class HttpPostDemo {
 			entity = new StringEntity(jsonString);
 			client = HttpClientBuilder.create().build();
 			post = new HttpPost(url);
-			post.setHeader("Authorization: ", header);
+			post.setHeader("Authorization", header);
 			post.setHeader("Content-type", "application/json");
 			post.setEntity(entity);
 		} catch (UnsupportedEncodingException e) {

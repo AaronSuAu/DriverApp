@@ -13,6 +13,7 @@ import com.google.gson.reflect.TypeToken;
 
 import http.HttpGetDemo;
 import http.HttpPutDemo;
+import http.HttpToken;
 import model.FeePayments;
 import model.RenewalNotices;
 import response.JsonResponseList;
@@ -53,7 +54,7 @@ public class OfficerUpdateServlet extends HttpServlet {
 		int nid = Integer.parseInt(request.getParameter("nid").trim());
 		// get the notice
 		String url = "http://localhost:8090/renewals/" + nid;
-		HttpGetDemo restRequest = new HttpGetDemo("123456", url);
+		HttpGetDemo restRequest = new HttpGetDemo(HttpToken.OFFICER_TOKEN, url);
 		String responseJson = restRequest.sendGetRequest();
 		JsonResponseList<RenewalNotices> jsonObject = new Gson().fromJson(responseJson,
 				new TypeToken<JsonResponseList<RenewalNotices>>() {
@@ -72,14 +73,14 @@ public class OfficerUpdateServlet extends HttpServlet {
 			// send put to rest server
 			try {
 				url = "http://localhost:8090/renewals";
-				HttpPutDemo putRequest = new HttpPutDemo(url, "123456", gson.toJson(notice));
+				HttpPutDemo putRequest = new HttpPutDemo(url, HttpToken.OFFICER_TOKEN, gson.toJson(notice));
 				String putResponse = putRequest.sendPutRequest();
 				jsonObject = gson.fromJson(putResponse, new TypeToken<JsonResponseList<RenewalNotices>>() {
 				}.getType());
 				if (jsonObject.getCode() == 200) {
 					// update fee amount
 					url = "http://localhost:8090/payments/nid/" + notice.getNid();
-					HttpGetDemo getRequest = new HttpGetDemo("123456", url);
+					HttpGetDemo getRequest = new HttpGetDemo(HttpToken.OFFICER_TOKEN, url);
 					String getResponse = getRequest.sendGetRequest();
 					JsonResponseList<FeePayments> paymentJson = gson.fromJson(getResponse,
 							new TypeToken<JsonResponseList<FeePayments>>() {
@@ -90,7 +91,7 @@ public class OfficerUpdateServlet extends HttpServlet {
 					} else {
 						payment.setAmount((int) amount);
 						url = "http://localhost:8090/payments";
-						putRequest = new HttpPutDemo(url, "123456", gson.toJson(payment));
+						putRequest = new HttpPutDemo(url, HttpToken.OFFICER_TOKEN, gson.toJson(payment));
 						putResponse = putRequest.sendPutRequest();
 						paymentJson = gson.fromJson(putResponse, new TypeToken<JsonResponseList<FeePayments>>() {
 						}.getType());

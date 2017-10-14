@@ -13,6 +13,7 @@ import com.google.gson.reflect.TypeToken;
 
 import http.HttpGetDemo;
 import http.HttpPostDemo;
+import http.HttpToken;
 import model.CarLicenses;
 import model.FeePayments;
 import model.RenewalNotices;
@@ -46,7 +47,7 @@ public class GenerateNoticeServlet extends HttpServlet {
 		Gson gson = new Gson();
 		int licid = Integer.parseInt(request.getParameter("licid"));
 		String url = "http://localhost:8090/licenses/" + licid;
-		HttpGetDemo getRequest = new HttpGetDemo("123456", url);
+		HttpGetDemo getRequest = new HttpGetDemo(HttpToken.OFFICER_TOKEN, url);
 		String responseJson = getRequest.sendGetRequest();
 		JsonResponseList<CarLicenses> jsonObject = new Gson().fromJson(responseJson,
 				new TypeToken<JsonResponseList<CarLicenses>>() {
@@ -66,7 +67,7 @@ public class GenerateNoticeServlet extends HttpServlet {
 		newNotice.setStatus("new");
 		newNotice.setReview_result("No_Comment");
 		url = "http://localhost:8090/renewals";
-		HttpPostDemo postRequest = new HttpPostDemo(url, "123456", gson.toJson(newNotice));
+		HttpPostDemo postRequest = new HttpPostDemo(url, HttpToken.OFFICER_TOKEN, gson.toJson(newNotice));
 		String postResponse = postRequest.sendPostRequest();
 		JsonResponseList<RenewalNotices> noticeJson = new Gson().fromJson(postResponse,
 				new TypeToken<JsonResponseList<RenewalNotices>>() {
@@ -78,7 +79,7 @@ public class GenerateNoticeServlet extends HttpServlet {
 		newPayment.setAmount(100);
 		newPayment.setNid(notice.getNid());
 		url = "http://localhost:8090/payments";
-		postRequest = new HttpPostDemo(url, "123456", gson.toJson(newPayment));
+		postRequest = new HttpPostDemo(url, HttpToken.OFFICER_TOKEN, gson.toJson(newPayment));
 		postResponse = postRequest.sendPostRequest();
 		JsonResponseList<FeePayments> paymentJson = new Gson().fromJson(postResponse,
 				new TypeToken<JsonResponseList<FeePayments>>() {

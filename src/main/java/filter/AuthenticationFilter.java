@@ -49,7 +49,7 @@ public class AuthenticationFilter implements Filter {
 		HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
 		HttpSession session = httpRequest.getSession(true);
 
-		String[] strs = { "login" }; // 路径中包含这些字符串的,可以不用登录直接访问
+		String[] strs = { "login","DriverLink1", "DriverLink2", "DriverUpdateAdd", "DriverPayment", "DriverExtend"}; // 路径中包含这些字符串的,可以不用登录直接访问
 		StringBuffer url = httpRequest.getRequestURL();
 
 		/**
