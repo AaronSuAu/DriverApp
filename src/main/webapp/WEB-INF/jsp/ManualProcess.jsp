@@ -23,7 +23,7 @@
            <%--  <label for="licenseNumber">License Number:</label>
             <p id="licenseNumber"> <%=notice.getLicid() %></p> --%>
             <label for="address">Address</label>
-            <input type="text" name="address" id="address" class="form-control" value=<%=notice.getAddress() %>>
+            <input type="text" name="address" id="address" class="form-control" value="<%=notice.getAddress() %>">
             <label for="email">Email</label>
             <input type="email" name="email" id='email' class="form-control" value=<%=notice.getContact_email() %>>
             <label for="status">Status</label>
