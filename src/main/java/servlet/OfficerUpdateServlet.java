@@ -66,7 +66,11 @@ public class OfficerUpdateServlet extends HttpServlet {
 				notice.setAddress(address);
 			if (!email.equals(""))
 				notice.setContact_email(email);
-			notice.setStatus(status);
+			if (status.contains("underReview")) {
+				notice.setStatus("underReview" + "(" + (String) request.getSession().getAttribute("user") + ")");
+			} else {
+				notice.setStatus(status);
+			}
 			if (!reviewResult.equals("")) {
 				notice.setReview_result(reviewResult);
 			}
